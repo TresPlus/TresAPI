@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="API/API.csproj" Id="1ca85b45-8bd5-42af-829e-e631bdd0a5da" />
+  <Project Path="Business/Business.csproj" />
+  <Project Path="DataAccess/DataAccess.csproj" />
+  <Project Path="Entities/Entities.csproj" />
+  <Project Path="ResultLayer/ResultLayer.csproj" Id="bd3e1c4a-ae38-4f71-a794-47f9aa220e0a" />
+</Solution>

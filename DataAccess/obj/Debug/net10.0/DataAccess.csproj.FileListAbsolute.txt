@@ -1,0 +1,17 @@
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\DataAccess.deps.json
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\DataAccess.runtimeconfig.json
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\DataAccess.dll
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\DataAccess.pdb
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\Entities.dll
+C:\Projects\Csharp\tresplus\DataAccess\bin\Debug\net10.0\Entities.pdb
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.csproj.AssemblyReference.cache
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.AssemblyInfoInputs.cache
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.AssemblyInfo.cs
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.csproj.Up2Date
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.dll
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\refint\DataAccess.dll
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.pdb
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\DataAccess.genruntimeconfig.cache
+C:\Projects\Csharp\tresplus\DataAccess\obj\Debug\net10.0\ref\DataAccess.dll
