@@ -7,7 +7,13 @@ namespace DataAccess.Abstract
 {
   public interface IUserRepository
   {
+    Task<IList<string>> GetEnabledTwoFactorProvidersAsync(AppUser user);
     Task<IList<Claim>> GetClaimsAsync(AppUser user);
+    Task<bool> IsTwoFactorEnabled(AppUser user);
+    Task<string> GenerateTwoFactorCode(AppUser user, string Provider);
+    Task<bool> VerifyTwoFactorTokenAsync(AppUser user, string Provider, string Token);
+    Task<IdentityResult> AddClaimsInDbAsync(AppUser user, IEnumerable<Claim> claims);
+    Task<IdentityResult> AddClaimsInDbAsync(AppUser user, Claim claim);
     Task<bool> CheckPasswordAsync(AppUser user, string Password);
     Task<IdentityResult> CreateAsync(AppUser user, string password);
     Task<IdentityResult> CreateAsync(AppUser user);
@@ -39,7 +45,17 @@ namespace DataAccess.Abstract
     bool IsSignedIn(ClaimsPrincipal principal);
     Task<AppUser> GetTwoFactorAuthenticationUserAsync();
     Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode);
-    Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode, bool rememberMe, bool RememberMachine);
+    Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string Provider,string authenticatorCode, bool rememberMe, bool RememberMachine);
     Task<IdentityResult> RemoveLoginAsync(AppUser user, string loginProvider, string providerKey);
+    Task<SignInResult> PasswordSignInAsync(
+    string userName,
+    string password,
+    bool rememberMe,
+    bool lockoutOnFailure);
+    Task<SignInResult> TwoFactorSignInAsync(
+  string provider,
+  string code,
+  bool rememberMe,
+  bool rememberMachine);
   }
 }

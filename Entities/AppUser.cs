@@ -9,6 +9,10 @@ namespace Entities
     public DateOnly? DeletionRequestedAt { get; set; }
     public DateOnly? CreatedAt { get; set; }
     public string? ProfilePicturePath { get; set; }
+    public string? coverPhoto { get; set; }
+    public string? visibleName { get; set; }
+    public string? location { get; set; }
+    public string? website { get; set; }
     public string? Bio { get; set; }
     public bool OnlineState { get; set; }
 
@@ -18,6 +22,7 @@ namespace Entities
 
     // Sosyal ilişkiler
     public ICollection<UserFollow> Followers { get; set; } = new List<UserFollow>();
+    public ICollection<UserFollow> Followings { get; set; } = new List<UserFollow>();
     public ICollection<ModelLike> Likes { get; set; } = new List<ModelLike>();
     public ICollection<ModelComment> Comments { get; set; } = new List<ModelComment>();
 

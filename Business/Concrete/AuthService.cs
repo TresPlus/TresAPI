@@ -7,34 +7,42 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Business.Static;
 
 namespace Business.Concrete
 {
-  public class AuthService(IUserRepository userRepository,IConfiguration conf) : IAuthService
+  public class AuthService(IUserRepository userRepository, IConfiguration conf) : IAuthService
   {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly IConfiguration _conf = conf;
 
-    public async Task<string> GenerateJwtToken(AppUser user)
-    {
-      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_conf["Jwt:Key"]));
+public async Task<string> GenerateJwtToken(
+  AppUser user,
+  Guid sessionId)
+{
+  var key = new SymmetricSecurityKey(
+    Convert.FromBase64String(_conf["Jwt:Key"])
+  );
 
-      var algorithm = _conf.GetJwtAlgorithm();
+  var algorithm = _conf.GetJwtAlgorithm();
+  var creds = new SigningCredentials(key, algorithm);
 
-      var creds = new SigningCredentials(key, algorithm);
+  var claims = await _userRepository.GetClaimsAsync(user);
 
-      var token = new JwtSecurityToken(
-          issuer: _conf["Jwt:Issuer"],
-          audience: _conf["Jwt:Audience"],
-          claims: await _userRepository.GetClaimsAsync(user),
-          expires: DateTime.UtcNow.AddDays(7),
-          signingCredentials: creds
-      );
+  claims.Add(new Claim("sid", sessionId.ToString()));
 
-      return new JwtSecurityTokenHandler().WriteToken(token);
-    }
+  var token = new JwtSecurityToken(
+    issuer: _conf["Jwt:Issuer"],
+    audience: _conf["Jwt:Audience"],
+    claims: claims,
+    expires: DateTime.UtcNow.AddDays(7),
+    signingCredentials: creds
+  );
+
+  return new JwtSecurityTokenHandler().WriteToken(token);
+}
+
+
     public async Task<IdentityResult> CheckPasswordAsync(AppUser user, string Password)
     {
       bool passwordValid = await _userRepository.CheckPasswordAsync(user, Password);
@@ -244,8 +252,29 @@ namespace Business.Concrete
       {
         return result;
       }
+      var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Name, user.UserName ?? ""),
+        new Claim(ClaimTypes.Email, user.Email ?? ""),
+    };
+      var ClaimResult = await _userRepository.AddClaimsInDbAsync(user, claims);
 
       var token = await _userRepository.GenerateEmailConfirmationTokenAsync(user);
+
+      if (!result.Succeeded || !ClaimResult.Succeeded)
+      {
+        return IdentityResult.Failed(
+            new IdentityError
+            {
+              Code = result.Succeeded ? "ClaimError" : "RegisterError",
+              Description = result.Succeeded
+                    ? string.Join(" | ", ClaimResult.Errors.Select(e => e.Description))
+                    : string.Join(" | ", result.Errors.Select(e => e.Description))
+            }
+        );
+      }
+
       return result;
     }
 
@@ -259,9 +288,9 @@ namespace Business.Concrete
       return _userRepository.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
     }
 
-    public Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode, bool rememberMe, bool RememberMachine)
+    public async Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string Provider,string authenticatorCode, bool rememberMe, bool RememberMachine)
     {
-      return _userRepository.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, RememberMachine);
+      return await _userRepository.TwoFactorAuthenticatorSignInAsync(Provider,authenticatorCode, rememberMe, RememberMachine);
     }
 
     public Task<string> GetUserEmail(AppUser user)
@@ -271,7 +300,32 @@ namespace Business.Concrete
 
     public Task<IdentityResult> RemoveLoginAsync(AppUser user, string loginProvider, string providerKey)
     {
-      return _userRepository.RemoveLoginAsync(user,loginProvider,providerKey);
+      return _userRepository.RemoveLoginAsync(user, loginProvider, providerKey);
+    }
+
+    public async Task<bool> IsTwoFactorEnabled(AppUser user)
+    {
+      return await _userRepository.IsTwoFactorEnabled(user);
+    }
+
+    public async Task<string> GenerateTwoFactorCode(AppUser user,string Provider)
+    {
+      return await _userRepository.GenerateTwoFactorCode(user,Provider);
+    }
+
+    public async Task<IList<string>> GetEnabledTwoFactorProvidersAsync(AppUser user)
+    {
+      return await _userRepository.GetEnabledTwoFactorProvidersAsync(user);
+    }
+
+    public async Task<SignInResult> PasswordSignInAsync(string userName, string password, bool rememberMe)
+    {
+      return await _userRepository.PasswordSignInAsync(userName,password,rememberMe,true);
+    }
+
+    public async Task<SignInResult> TwoFactorSignInAsync(string provider, string code, bool rememberMe, bool rememberMachine)
+    {
+      return await _userRepository.TwoFactorSignInAsync(provider,code,rememberMe,rememberMachine);
     }
   }
 }

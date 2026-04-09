@@ -60,27 +60,43 @@ namespace Business.Concrete
     }
 
     // GET FOLLOWERS
-    public async Task<IDataResult<List<AppUser>>> GetFollowers(Guid userId)
+    public async Task<IDataResult<List<UserPreviewDto>>> GetFollowers(Guid userId)
     {
       var followers = await _data.UserFollows
           .Where(uf => uf.FollowedUserId == userId)
           .Include(uf => uf.Follower)
-          .Select(uf => uf.Follower)
+          .Select(uf =>
+          new UserPreviewDto
+          {
+            Id = uf.Follower.Id,
+            UserName = uf.Follower.UserName,
+            VisibleName = uf.Follower.visibleName,
+            ProfilePicturePath = uf.Follower.ProfilePicturePath
+          })
           .ToListAsync();
 
-      return new SuccessDataResult<List<AppUser>>(followers, "Takipçiler listelendi.");
+      return new SuccessDataResult<List<UserPreviewDto>>(followers, "Takipçiler listelendi.");
     }
 
     // GET FOLLOWINGS
-    public async Task<IDataResult<List<AppUser>>> GetFollowings(Guid userId)
+    public async Task<IDataResult<List<UserPreviewDto>>> GetFollowings(Guid userId)
     {
       var followings = await _data.UserFollows
           .Where(uf => uf.FollowerUserId == userId)
-          .Include(uf => uf.Follower)
-          .Select(uf => uf.Follower)
+          .Include(uf => uf.Followed)
+          .Select(uf => new UserPreviewDto
+          {
+            Id = uf.Followed.Id,
+            UserName = uf.Followed.UserName,
+            VisibleName = uf.Followed.visibleName,
+            ProfilePicturePath = uf.Followed.ProfilePicturePath
+          })
           .ToListAsync();
 
-      return new SuccessDataResult<List<AppUser>>(followings, "Takip edilenler listelendi.");
+      return new SuccessDataResult<List<UserPreviewDto>>(
+          followings,
+          "Takip edilenler listelendi."
+      );
     }
 
     // IS FOLLOWING BY ID
@@ -93,6 +109,26 @@ namespace Business.Concrete
         return new SuccessResult("Takip ediliyor.");
 
       return new ErrorResult("Takip edilmiyor.");
+    }
+
+    // REMOVE FOLLOWER (beni takip eden kişiyi çıkar)
+    public async Task<IResult> RemoveFollower(Guid ownerId, Guid followerId)
+    {
+      if (ownerId == followerId)
+        return new ErrorResult("Kendinizi çıkaramazsınız.");
+
+      var relation = await _data.UserFollows
+          .FirstOrDefaultAsync(x =>
+            x.FollowerUserId == followerId &&
+            x.FollowedUserId == ownerId);
+
+      if (relation == null)
+        return new ErrorResult("Takipçi bulunamadı.");
+
+      _data.UserFollows.Remove(relation);
+      await _data.SaveChangesAsync();
+
+      return new SuccessResult("Takipçi çıkarıldı.");
     }
 
     // IS FOLLOWING BY USERNAME

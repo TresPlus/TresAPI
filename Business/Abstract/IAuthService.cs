@@ -7,7 +7,10 @@ namespace Business.Abstract
 {
   public interface IAuthService
   {
-    Task<string> GenerateJwtToken(AppUser user);
+    Task<string> GenerateJwtToken(AppUser user,Guid sessionId);
+    Task<string> GenerateTwoFactorCode(AppUser user, string Provider);
+    Task<IList<string>> GetEnabledTwoFactorProvidersAsync(AppUser user);
+    Task<bool> IsTwoFactorEnabled(AppUser user);
     Task<IdentityResult> CheckPasswordAsync(AppUser user, string Password);
     Task<IdentityResult> UserNameAlreadyExists(string Username);
     Task<IdentityResult> EmailAlreadyExists(string Email);
@@ -39,7 +42,17 @@ namespace Business.Abstract
     bool IsSignedIn(ClaimsPrincipal principal);
     Task<AppUser> GetTwoFactorAuthenticationUserAsync();
     Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode);
-    Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode,bool rememberMe,bool RememberMachine);
+    Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string Provider, string authenticatorCode,bool rememberMe,bool RememberMachine);
     Task<IdentityResult> RemoveLoginAsync(AppUser user, string loginProvider, string providerKey);
+    Task<SignInResult> PasswordSignInAsync(
+  string userName,
+  string password,
+  bool rememberMe);
+    Task<SignInResult> TwoFactorSignInAsync(
+string provider,
+string code,
+bool rememberMe,
+bool rememberMachine);
+
   }
 }

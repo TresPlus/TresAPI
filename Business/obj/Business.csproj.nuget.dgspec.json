@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Csharp\\tresplus\\Business\\Business.csproj": {}
+    "C:\\Projects\\Csharp\\Tres\\Business\\Business.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Csharp\\tresplus\\Business\\Business.csproj": {
+    "C:\\Projects\\Csharp\\Tres\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Csharp\\tresplus\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Projects\\Csharp\\Tres\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Projects\\Csharp\\tresplus\\Business\\Business.csproj",
+        "projectPath": "C:\\Projects\\Csharp\\Tres\\Business\\Business.csproj",
         "packagesPath": "C:\\Users\\emiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Csharp\\tresplus\\Business\\obj\\",
+        "outputPath": "C:\\Projects\\Csharp\\Tres\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,14 +32,14 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Projects\\Csharp\\tresplus\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Projects\\Csharp\\tresplus\\DataAccess\\DataAccess.csproj"
+              "C:\\Projects\\Csharp\\Tres\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Projects\\Csharp\\Tres\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj"
+              "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj"
               },
-              "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\ResultLayer.csproj": {
-                "projectPath": "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\ResultLayer.csproj"
+              "C:\\Projects\\Csharp\\Tres\\ResultLayer\\ResultLayer.csproj": {
+                "projectPath": "C:\\Projects\\Csharp\\Tres\\ResultLayer\\ResultLayer.csproj"
               }
             }
           }
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -363,14 +363,14 @@
         }
       }
     },
-    "C:\\Projects\\Csharp\\tresplus\\DataAccess\\DataAccess.csproj": {
+    "C:\\Projects\\Csharp\\Tres\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Csharp\\tresplus\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Projects\\Csharp\\Tres\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Projects\\Csharp\\tresplus\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Projects\\Csharp\\Tres\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\emiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Csharp\\tresplus\\DataAccess\\obj\\",
+        "outputPath": "C:\\Projects\\Csharp\\Tres\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -391,8 +391,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj"
+              "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj"
               }
             }
           }
@@ -454,7 +454,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -732,14 +732,14 @@
         }
       }
     },
-    "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj": {
+    "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\emiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\obj\\",
+        "outputPath": "C:\\Projects\\Csharp\\Tres\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -803,7 +803,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1081,14 +1081,14 @@
         }
       }
     },
-    "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\ResultLayer.csproj": {
+    "C:\\Projects\\Csharp\\Tres\\ResultLayer\\ResultLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\ResultLayer.csproj",
+        "projectUniqueName": "C:\\Projects\\Csharp\\Tres\\ResultLayer\\ResultLayer.csproj",
         "projectName": "ResultLayer",
-        "projectPath": "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\ResultLayer.csproj",
+        "projectPath": "C:\\Projects\\Csharp\\Tres\\ResultLayer\\ResultLayer.csproj",
         "packagesPath": "C:\\Users\\emiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Csharp\\tresplus\\ResultLayer\\obj\\",
+        "outputPath": "C:\\Projects\\Csharp\\Tres\\ResultLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1142,7 +1142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

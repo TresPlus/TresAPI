@@ -40,7 +40,7 @@ namespace API.Extensions
       }
 
       // web yolu geri dönülüyor
-      return "/" + string.Join("/", pathSegments) + "/" + fileName;
+      return "/" + string.Join("/", pathSegments) + "/" + fileName; 
     }
 
     // ------------------------------------------------------

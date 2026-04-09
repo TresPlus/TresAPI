@@ -32,59 +32,43 @@ namespace Business.Concrete
       }
     }
 
-    // UPDATE
-    public async Task<IResult> UpdateGlas(Glas glas)
+    public async Task<IResult> UpdateGlas(Glas input, Guid userId)
     {
-      try
-      {
-        var existing = await _data.Glasses
-            .FirstOrDefaultAsync(g => g.GlasId == glas.GlasId);
+      var glas = await _data.Glasses
+          .FirstOrDefaultAsync(g => g.GlasId == input.GlasId && g.UserId == userId);
 
-        if (existing == null)
-          return new ErrorResult("Güncellenecek Glas bulunamadı.");
+      if (glas == null)
+        return new ErrorResult("Glas bulunamadı.");
 
-        // Sadece dolu gelen alanları set et
-        if (glas.Title != null)
-          existing.Title = glas.Title;
+      if (input.Title != null)
+        glas.Title = input.Title;
 
-        if (glas.SourceURL != null)
-          existing.SourceURL = glas.SourceURL;
+      if (input.Description != null)
+        glas.Description = input.Description;
 
-        if (glas.Description != null)
-          existing.Description = glas.Description;
+      if (input.ImageUrl != null)
+        glas.ImageUrl = input.ImageUrl;
 
-        // … diğer alanlar için aynı şekilde devam
+      glas.LastUpdatedAt = DateTime.UtcNow;
 
-        await _data.SaveChangesAsync();
-        return new SuccessResult("Glas başarıyla güncellendi.");
-      }
-      catch (Exception ex)
-      {
-        return new ErrorResult($"Glas güncellenirken hata oluştu: {ex.Message}, {ex.InnerException?.Message}");
-      }
+      await _data.SaveChangesAsync();
+      return new SuccessResult("Glas güncellendi.");
+    }
+    public async Task<IResult> DeleteGlas(Guid id, Guid userId)
+    {
+      var glas = await _data.Glasses
+          .FirstOrDefaultAsync(g => g.GlasId == id && g.UserId == userId);
+
+      if (glas == null)
+        return new ErrorResult("Glas bulunamadı.");
+
+      glas.IsDeleted = true;
+      glas.LastUpdatedAt = DateTime.UtcNow;
+
+      await _data.SaveChangesAsync();
+      return new SuccessResult("Glas silindi.");
     }
 
-
-    // DELETE
-    public async Task<IResult> DeleteGlas(Guid id)
-    {
-      try
-      {
-        var glas = await _data.Glasses.FirstOrDefaultAsync(g => g.GlasId == id);
-
-        if (glas == null)
-          return new ErrorResult("Silinecek Glas bulunamadı.");
-
-        _data.Glasses.Remove(glas);
-        await _data.SaveChangesAsync();
-
-        return new SuccessResult("Glas başarıyla silindi.");
-      }
-      catch (Exception ex)
-      {
-        return new ErrorResult($"Glas silinirken hata oluştu: {ex.Message}");
-      }
-    }
 
     // GET BY ID
     public IDataResult<Glas> GetGlas(Guid id)
@@ -99,14 +83,14 @@ namespace Business.Concrete
       return new SuccessDataResult<Glas>(glas, "Glas listelendi.");
     }
 
-    // GET ALL
     public async Task<IDataResult<IList<Glas>>> GetGlases()
     {
       var result = await _data.Glasses
-          .Include(u => u.User)
+          .Include(x => x.User)
+          .OrderByDescending(x => x.CreatedAt)
           .ToListAsync();
 
-      return new SuccessDataResult<IList<Glas>>(result, "Tüm Glas'lar listelendi.");
+      return new SuccessDataResult<IList<Glas>>(result);
     }
 
     // GET BY USER

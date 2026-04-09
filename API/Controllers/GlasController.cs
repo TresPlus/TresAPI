@@ -1,10 +1,9 @@
 using API.Dtos;
 using API.Extensions;
-using Azure;
 using Business.Abstract;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace API.Controllers
 {
@@ -47,70 +46,94 @@ namespace API.Controllers
     // CREATE
     // -------------------------------------------------------
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Add([FromForm] CreateGlasDto glas)
     {
-      var ImageResult = await _fileStorage.SaveFileAsync(glas.File, ["Images", "Glasses"]);
-      var result = await _glasService.CreateGlas(
-        new Glas
-        {
-          Title = glas.Title,
-          Description = glas.Description,
-          CreatedAt = DateTime.UtcNow,
-          UserId = glas.UserId,
-          SourceURL = ImageResult,
-          LastUpdatedAt = DateTime.UtcNow,
-        });
+      var userId = User.GetUserId(); // Extension method
 
-      if (result.Success)
-        return StatusCode(201,
-          new
-          {
-            Id = result.Data,
-            Title = glas.Title,
-            Description = glas.Description,
-            SourceURL = ImageResult,
-            CreatedAt = DateTime.Now,
-            UserId = glas.UserId
-          });
+      string? imageUrl = null;
+      if (glas.File != null)
+      {
+        imageUrl = await _fileStorage.SaveFileAsync(
+            glas.File,
+            ["Images", "Glasses"]
+        );
+      }
 
-      return BadRequest(result);
+      var result = await _glasService.CreateGlas(new Glas
+      {
+        GlasId = Guid.NewGuid(),
+        Title = glas.Title,
+        Description = glas.Description,
+        ImageUrl = imageUrl,
+        SourceURL = glas.SourceURL,
+        Latitude = glas.Latitude,
+        Longitude = glas.Longitude,
+        LocationAddress = glas.LocationAddress,
+        UserId = userId,
+        CreatedAt = DateTime.UtcNow,
+        LastUpdatedAt = DateTime.UtcNow
+      });
+
+      if (!result.Success)
+        return BadRequest(result);
+
+      return CreatedAtAction(
+          nameof(GetById),
+          new { id = result.Data },
+          result
+      );
     }
+
 
     // -------------------------------------------------------
     // UPDATE
     // -------------------------------------------------------
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, [FromForm] UpdateGlasDto glas)
+    [Authorize]
+    public async Task<IActionResult> Update(Guid id, [FromForm] UpdateGlasDto dto)
     {
-      if (id != glas.GlasId)
-        return BadRequest(new { Success = false, Message = "ID alanı uyumsuz." });
+      if (id != dto.GlasId)
+        return BadRequest("ID uyumsuz");
 
-      var result = await _glasService.UpdateGlas(new Glas
+      var userId = User.GetUserId();
+
+      string? imageUrl = null;
+      if (dto.File != null)
       {
-        GlasId = glas.GlasId,
-        Title = glas.Title,
-        Description = glas.Description,
-        LastUpdatedAt = DateTime.UtcNow,
-      });
+        imageUrl = await _fileStorage.SaveFileAsync(
+            dto.File,
+            ["Images", "Glasses"]
+        );
+      }
 
-      if (result.Success)
-        return Ok(result);
+      var glas = new Glas
+      {
+        GlasId = dto.GlasId,
+        Title = dto.Title,
+        Description = dto.Description,
+        ImageUrl = imageUrl,
+        LastUpdatedAt = DateTime.UtcNow
+      };
 
-      return BadRequest(result);
+      var result = await _glasService.UpdateGlas(glas, userId);
+
+      return result.Success ? Ok(result) : BadRequest(result);
     }
+
 
     // -------------------------------------------------------
     // DELETE
     // -------------------------------------------------------
     [HttpDelete("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> Delete(Guid id)
     {
-      var result = await _glasService.DeleteGlas(id);
+      var userId = User.GetUserId();
 
-      if (result.Success)
-        return Ok(result);
+      var result = await _glasService.DeleteGlas(id, userId);
 
-      return BadRequest(result);
+      return result.Success ? Ok(result) : BadRequest(result);
     }
   }
 }

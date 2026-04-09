@@ -1,19 +1,22 @@
 using Business.Abstract;
-using Business.Static;
 using DataAccess.Interactive;
 using Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+using ResultLayer.Abstract;
+using ResultLayer.Concrete;
 using System.Reflection;
 using System.Security.Claims;
-using System.Text;
+using System.Security.Principal;
 
 namespace Business.Concrete
 {
-  public class UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, IConfiguration conf) : IUserService
+  public class UserService(
+    UserManager<AppUser> userManager,
+    SignInManager<AppUser> signInManager,
+    DataContext context,
+    IConfiguration conf) : IUserService
   {
     private UserManager<AppUser> _userManager = userManager;
     private SignInManager<AppUser> _SignInManager = signInManager;
@@ -176,13 +179,94 @@ namespace Business.Concrete
       return await _userManager.AddPasswordAsync(user, Password);
     }
 
-    public async Task<AppUser> LoadUserFindByName(string UserName)
+    public async Task<IDataResult<AppUser>> LoadUserFindByName(string UserName)
     {
-      return await _context.Users
+      try
+      {
+        var result = await _context.Users
         .Where(X => X.UserName == UserName)
         .Include(u => u.Followers)
         .FirstOrDefaultAsync(u => u.UserName.ToLower() == UserName.ToLower());
-      //return await _userManager.FindByNameAsync(UserName);
+        return new DataResult<AppUser>(result, true);
+
+      }
+      catch (Exception Ex)
+      {
+        return new DataResult<AppUser>(null, false, $"Liste Veritabanından Getirilmeye Çalışırken Bir Hata Oluştu{Ex.Message}");
+      }
+    }
+
+
+
+    public async Task<IDataResult<AppUser>> FindById(Guid Id)
+    {
+      try
+      {
+        var result = await _userManager.FindByIdAsync(Id.ToString());
+        return new DataResult<AppUser>(await _userManager.FindByIdAsync(Id.ToString()), true);
+
+      }
+      catch (Exception Ex)
+      {
+        return new DataResult<AppUser>(await _userManager.FindByIdAsync(Id.ToString()), false,
+  $"Kullanıcı Veritabanından Getirilmeye Çalışırken Bir Hata Oluştu{Ex.Message}");
+
+      }
+    }
+
+    public async Task<IReadOnlyList<UserSession>> GetActiveSessionsAsync(ClaimsPrincipal user)
+    {
+      var userId = GetUserIdAsync(user);
+
+      return await _context.AspNetSessions
+        .Where(x => x.UserId == Guid.Parse(userId))
+        .OrderByDescending(x => x.LastSeen)
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
+    public async Task<IdentityResult> RevokeOtherSessionsAsync(ClaimsPrincipal user, Guid currentSessionId)
+    {
+      var userId = GetUserIdAsync(user);
+
+      var sessions = await _context.AspNetSessions
+        .Where(x => x.UserId == Guid.Parse(userId) && x.Id != currentSessionId)
+        .ToListAsync();
+
+      if (!sessions.Any())
+        return IdentityResult.Success;
+
+      _context.AspNetSessions.RemoveRange(sessions);
+      await _context.SaveChangesAsync();
+
+      return IdentityResult.Success;
+    }
+
+    public async Task<IReadOnlyList<SecurityEvent>> GetSecurityEventsAsync(ClaimsPrincipal user)
+    {
+      var userId = GetUserIdAsync(user);
+
+      return await _context.SecurityEvents
+        .Where(x => x.UserId == userId)
+        .OrderByDescending(x => x.CreatedAt)
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
+    public string GetUserIdAsync(ClaimsPrincipal user)
+    {
+      var Id = _userManager.GetUserId(user)
+        ?? throw new UnauthorizedAccessException();
+
+      return Id;
+    }
+
+    public async Task<Guid> CreateSessionAsync(AppUser user, UserSession session)
+    {
+      _context.AspNetSessions.Add(session);
+      await _context.SaveChangesAsync();
+
+      return session.Id;
     }
   }
 }

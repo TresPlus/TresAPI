@@ -1,5 +1,7 @@
 using Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using ResultLayer.Abstract;
 using System.Reflection;
 using System.Security.Claims;
 
@@ -7,7 +9,8 @@ namespace Business.Abstract
 {
   public interface IUserService
   {
-    Task<AppUser> LoadUserFindByName(string UserName);
+    Task<IDataResult<AppUser>> FindById(Guid Id);
+    Task<IDataResult<AppUser>> LoadUserFindByName(string UserName);
     Task<IdentityResult> ChangeEmailAsync(AppUser user, string newEmail, string token);
     Task<IdentityResult> ChangeUserName(AppUser user, string Name);
     Task<IdentityResult> ChangeEmail(AppUser user, string Email);
@@ -37,5 +40,21 @@ namespace Business.Abstract
     Task<string> GenerateChangeEmailTokenAsync(AppUser user,string newEmail);
     Task<string> GenerateEmailConfirmationTokenAsync(AppUser user);
     Task<IdentityResult> AddPassword(AppUser user,string Password);
+    Task<IReadOnlyList<UserSession>> GetActiveSessionsAsync(ClaimsPrincipal user);
+    Task<IdentityResult> RevokeOtherSessionsAsync(
+      ClaimsPrincipal user,
+      Guid currentSessionId
+    );
+
+    // SECURITY LOG
+    Task<IReadOnlyList<SecurityEvent>> GetSecurityEventsAsync(ClaimsPrincipal user);
+
+    // HELPERS
+    string GetUserIdAsync(ClaimsPrincipal user);
+
+    Task<Guid> CreateSessionAsync(
+  AppUser user,
+  UserSession session);
+
   }
 }

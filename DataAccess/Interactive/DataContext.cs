@@ -10,7 +10,7 @@ namespace DataAccess.Interactive
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{
-    //  optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TresPlus;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30");
+    //  optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Tres;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30");
     //}
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -33,18 +33,31 @@ namespace DataAccess.Interactive
       builder.Entity<ModelLike>()
           .HasKey(x => new { x.Model3DId, x.UserId });
 
-      builder.Entity<UserFollow>(Entity =>
+      builder.Entity<UserFollow>(entity =>
       {
-        Entity.HasKey(x => new { x.FollowerUserId, x.UserFollowId });
-        Entity.HasOne(uf => uf.Follower)
-          .WithMany(u => u.Followers)
-          .HasForeignKey(uf => uf.FollowerUserId)
-          .OnDelete(DeleteBehavior.Restrict);
+        entity.HasKey(x => x.UserFollowId);
 
-        Entity.HasOne(uf => uf.Follower)
-          .WithMany(u => u.Followers)
-          .HasForeignKey(uf => uf.FollowerUserId)
-          .OnDelete(DeleteBehavior.Restrict);
+        entity.HasIndex(x => new { x.FollowerUserId, x.FollowedUserId })
+              .IsUnique();
+
+        // TAKİP EDEN -> Followings
+        entity
+            .HasOne(uf => uf.Follower)
+            .WithMany(u => u.Followings)
+            .HasForeignKey(uf => uf.FollowerUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // TAKİP EDİLEN -> Followers
+        entity
+            .HasOne(uf => uf.Followed)
+            .WithMany(u => u.Followers)
+            .HasForeignKey(uf => uf.FollowedUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        entity.HasCheckConstraint(
+            "CK_UserFollow_NoSelfFollow",
+            "[FollowerUserId] <> [FollowedUserId]"
+        );
       });
 
       // -----------------------------
@@ -85,21 +98,6 @@ namespace DataAccess.Interactive
           .HasOne(l => l.User)
           .WithMany(u => u.Likes)
           .HasForeignKey(l => l.UserId);
-
-      // -----------------------------
-      // UserFollow relations (restrict deletes)
-      // -----------------------------
-      builder.Entity<UserFollow>()
-          .HasOne(f => f.Follower)
-          .WithMany(u => u.Followers)
-          .HasForeignKey(f => f.FollowerUserId)
-          .OnDelete(DeleteBehavior.Restrict);
-
-      builder.Entity<UserFollow>()
-          .HasOne(f => f.Follower)
-          .WithMany(u => u.Followers)
-          .HasForeignKey(f => f.FollowerUserId)
-          .OnDelete(DeleteBehavior.Restrict);
 
       // -----------------------------
       // ModelSettings one-to-one
@@ -156,6 +154,41 @@ namespace DataAccess.Interactive
       .Property(x => x.GlasId)
       .ValueGeneratedOnAdd()
       .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+      builder.Entity<UserSession>(entity =>
+      {
+        entity.ToTable("UserSessions");
+
+        entity.HasKey(x => x.Id);
+
+        entity.Property(x => x.Id)
+              .ValueGeneratedOnAdd()
+              .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+        entity.Property(x => x.UserId)
+              .IsRequired();
+
+        entity.Property(x => x.Device)
+              .HasMaxLength(256)
+              .IsRequired();
+
+        entity.Property(x => x.IpAddress)
+              .HasMaxLength(45) // IPv6 support
+              .IsRequired();
+
+        entity.Property(x => x.CreatedAt)
+              .HasDefaultValueSql("GETUTCDATE()");
+
+        entity.Property(x => x.LastSeen)
+              .HasDefaultValueSql("GETUTCDATE()");
+
+        entity.HasOne(x => x.User)
+              .WithMany()
+              .HasForeignKey(x => x.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
+
+        entity.HasIndex(x => x.UserId);
+      });
     }
 
 
@@ -180,6 +213,8 @@ namespace DataAccess.Interactive
     public DbSet<UserFollow> UserFollows => Set<UserFollow>();
     public DbSet<ModelReport> ModelReports => Set<ModelReport>();
 
+    public DbSet<UserSession> AspNetSessions => Set<UserSession>();
+    public DbSet<SecurityEvent> SecurityEvents => Set<SecurityEvent>();
     public DbSet<Glas> Glasses => Set<Glas>();
 
   }

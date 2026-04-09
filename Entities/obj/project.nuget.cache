@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tB961mL1wxk=",
+  "dgSpecHash": "p73/Y4GXqLU=",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj",
+  "projectFilePath": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\emiro\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.3.0\\microsoft.aspnetcore.authentication.2.3.0.nupkg.sha512",
     "C:\\Users\\emiro\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",

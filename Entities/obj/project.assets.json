@@ -1394,11 +1394,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj",
+      "projectUniqueName": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\Entities.csproj",
+      "projectPath": "C:\\Projects\\Csharp\\Tres\\Entities\\Entities.csproj",
       "packagesPath": "C:\\Users\\emiro\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Csharp\\tresplus\\Entities\\obj\\",
+      "outputPath": "C:\\Projects\\Csharp\\Tres\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1462,7 +1462,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

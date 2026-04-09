@@ -31,10 +31,10 @@ namespace Entities
     public Guid UserFollowId { get; set; } = Guid.NewGuid();
 
     [Required]
-    public Guid FollowerUserId { get; set; } // Takip eden
+    public Guid FollowerUserId { get; set; }
 
     [Required]
-    public Guid FollowedUserId { get; set; } // Takip edilen
+    public Guid FollowedUserId { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
@@ -44,6 +44,14 @@ namespace Entities
 
     [ForeignKey("FollowedUserId")]
     public virtual AppUser Followed { get; set; }
+  }
+
+  public class UserPreviewDto
+  {
+    public Guid Id { get; set; }
+    public string UserName { get; set; } = null!;
+    public string? VisibleName { get; set; }
+    public string? ProfilePicturePath { get; set; }
   }
 
   public class ModelReport

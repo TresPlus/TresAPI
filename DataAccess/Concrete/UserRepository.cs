@@ -181,9 +181,29 @@ namespace DataAccess.Concrete
       return _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
     }
 
-    public Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode, bool rememberMe, bool RememberMachine)
+    public async Task<SignInResult> TwoFactorAuthenticatorSignInAsync(
+      string Provider,
+      string authenticatorCode,
+      bool rememberMe,
+      bool RememberMachine)
     {
-      return _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, RememberMachine);
+      if (string.IsNullOrWhiteSpace(Provider))
+        return SignInResult.Failed;
+
+      Provider = Provider.ToLowerInvariant() switch
+      {
+        "email" => "Email",
+        "sms" or "phone" => "Phone",
+        "totp" or "authenticator" or "authenticatorkey" => "Authenticator",  // ✅ Hepsi küçük harf
+        _ => ""
+      };
+
+      if (string.IsNullOrWhiteSpace(Provider)||Provider == null)
+      {
+        return SignInResult.Failed;
+      }
+
+      return await _signInManager.TwoFactorSignInAsync(Provider, authenticatorCode, rememberMe, RememberMachine);
     }
 
     public async Task<string> GetUserEmailAsync(AppUser user)
@@ -194,6 +214,60 @@ namespace DataAccess.Concrete
     public async Task<IdentityResult> RemoveLoginAsync(AppUser user, string loginProvider, string providerKey)
     {
       return await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
+    }
+
+    public async Task<IdentityResult> AddClaimsInDbAsync(AppUser user, IEnumerable<Claim> claims)
+    {
+      return await _userManager.AddClaimsAsync(user, claims);
+    }
+
+    public async Task<IdentityResult> AddClaimsInDbAsync(AppUser user, Claim claim)
+    {
+      return await _userManager.AddClaimAsync(user, claim);
+    }
+
+    public async Task<bool> IsTwoFactorEnabled(AppUser user)
+    {
+      return await _userManager.GetTwoFactorEnabledAsync(user);
+    }
+
+    public async Task<string> GenerateTwoFactorCode(AppUser user, string Provider)
+    {
+      return await _userManager.GenerateTwoFactorTokenAsync(user, Provider);
+    }
+
+    public async Task<bool> VerifyTwoFactorTokenAsync(AppUser user, string Provider, string Token)
+    {
+      return await _userManager.VerifyTwoFactorTokenAsync(user, Provider, Token);
+    }
+
+    public async Task<IList<string>> GetEnabledTwoFactorProvidersAsync(AppUser user)
+    {
+      var providers = new List<string>();
+
+      if (user.TwoFactorEnabled)
+      {
+        if (user.EmailConfirmed)
+          providers.Add("email");
+
+        if (user.PhoneNumberConfirmed)
+          providers.Add("sms");
+
+        if (await _userManager.GetAuthenticatorKeyAsync(user) != null)
+          providers.Add("totp");
+      }
+
+      return providers;
+    }
+
+    public async Task<SignInResult> PasswordSignInAsync(string userName, string password, bool rememberMe, bool lockoutOnFailure)
+    {
+      return await _signInManager.PasswordSignInAsync(userName,password, rememberMe,true);
+    }
+
+    public async Task<SignInResult> TwoFactorSignInAsync(string provider, string code, bool rememberMe, bool rememberMachine)
+    {
+      return await _signInManager.TwoFactorSignInAsync(provider,code,rememberMe,rememberMachine);
     }
   }
 }

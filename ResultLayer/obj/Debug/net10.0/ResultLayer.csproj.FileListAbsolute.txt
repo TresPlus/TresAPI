@@ -9,3 +9,16 @@ C:\Projects\Csharp\tresplus\ResultLayer\obj\Debug\net10.0\ResultLayer.dll
 C:\Projects\Csharp\tresplus\ResultLayer\obj\Debug\net10.0\refint\ResultLayer.dll
 C:\Projects\Csharp\tresplus\ResultLayer\obj\Debug\net10.0\ResultLayer.pdb
 C:\Projects\Csharp\tresplus\ResultLayer\obj\Debug\net10.0\ref\ResultLayer.dll
+C:\Projects\Csharp\tresplus\ResultLayer\obj\Debug\net10.0\ResultLayer.sourcelink.json
+C:\Projects\Csharp\Tres\ResultLayer\bin\Debug\net10.0\ResultLayer.deps.json
+C:\Projects\Csharp\Tres\ResultLayer\bin\Debug\net10.0\ResultLayer.dll
+C:\Projects\Csharp\Tres\ResultLayer\bin\Debug\net10.0\ResultLayer.pdb
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.AssemblyInfoInputs.cache
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.AssemblyInfo.cs
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.csproj.CoreCompileInputs.cache
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.sourcelink.json
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.dll
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\refint\ResultLayer.dll
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ResultLayer.pdb
+C:\Projects\Csharp\Tres\ResultLayer\obj\Debug\net10.0\ref\ResultLayer.dll

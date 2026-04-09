@@ -1,14 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Projects\\Csharp\\tresplus\\",
+  "WorkspaceRootPath": "C:\\Projects\\Csharp\\Tres\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|c:\\projects\\csharp\\tresplus\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|c:\\projects\\csharp\\tres\\business\\concrete\\socialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|solutionrelative:business\\concrete\\socialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|c:\\projects\\csharp\\tresplus\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|c:\\projects\\csharp\\tres\\api\\controllers\\socialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|solutionrelative:api\\controllers\\socialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|c:\\projects\\csharp\\tres\\business\\concrete\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|solutionrelative:business\\concrete\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|c:\\projects\\csharp\\tres\\business\\abstract\\isocialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5827C10-32D2-D72F-4639-49B48E591E74}|Business\\Business.csproj|solutionrelative:business\\abstract\\isocialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95DE3BD9-A587-35A9-17E0-3C34D2A57441}|Entities\\Entities.csproj|c:\\projects\\csharp\\tres\\entities\\socialandmoderation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95DE3BD9-A587-35A9-17E0-3C34D2A57441}|Entities\\Entities.csproj|solutionrelative:entities\\socialandmoderation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95DE3BD9-A587-35A9-17E0-3C34D2A57441}|Entities\\Entities.csproj|c:\\projects\\csharp\\tres\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95DE3BD9-A587-35A9-17E0-3C34D2A57441}|Entities\\Entities.csproj|solutionrelative:entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|c:\\projects\\csharp\\tres\\api\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1CA85B45-8BD5-42AF-829E-E631BDD0A5DA}|API\\API.csproj|solutionrelative:api\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45E8AD2D-F6CC-99C0-B6AF-489676982DA4}|DataAccess\\DataAccess.csproj|c:\\projects\\csharp\\tres\\dataaccess\\interactive\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45E8AD2D-F6CC-99C0-B6AF-489676982DA4}|DataAccess\\DataAccess.csproj|solutionrelative:dataaccess\\interactive\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,41 +42,108 @@
       "DocumentGroups": [
         {
           "DockedHeight": 838,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Projects\\Csharp\\tresplus\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "API\\appsettings.json",
-              "ToolTip": "C:\\Projects\\Csharp\\tresplus\\API\\appsettings.json",
-              "RelativeToolTip": "API\\appsettings.json",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADAAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-09T19:58:19.582Z",
-              "EditorCaption": ""
+              "DocumentIndex": 3,
+              "Title": "ISocialService.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\Business\\Abstract\\ISocialService.cs",
+              "RelativeDocumentMoniker": "Business\\Abstract\\ISocialService.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\Business\\Abstract\\ISocialService.cs",
+              "RelativeToolTip": "Business\\Abstract\\ISocialService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T18:40:00.711Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Projects\\Csharp\\tresplus\\API\\Program.cs",
-              "RelativeDocumentMoniker": "API\\Program.cs",
-              "ToolTip": "C:\\Projects\\Csharp\\tresplus\\API\\Program.cs",
-              "RelativeToolTip": "API\\Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAywAAAAAAAAAAAAAAAAA==",
+              "Title": "SocialController.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\API\\Controllers\\SocialController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\SocialController.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\API\\Controllers\\SocialController.cs",
+              "RelativeToolTip": "API\\Controllers\\SocialController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAIwBgAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T19:35:03.745Z",
+              "WhenOpened": "2025-12-30T18:24:23.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\API\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\API\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "API\\Controllers\\ProfileController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T18:23:56.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\Business\\Concrete\\UserService.cs",
+              "RelativeDocumentMoniker": "Business\\Concrete\\UserService.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\Business\\Concrete\\UserService.cs",
+              "RelativeToolTip": "Business\\Concrete\\UserService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAD4v0EAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T17:44:41.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\Entities\\AppUser.cs",
+              "RelativeDocumentMoniker": "Entities\\AppUser.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\Entities\\AppUser.cs",
+              "RelativeToolTip": "Entities\\AppUser.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA5wBgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T17:44:16.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\DataAccess\\Interactive\\DataContext.cs",
+              "RelativeDocumentMoniker": "DataAccess\\Interactive\\DataContext.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\DataAccess\\Interactive\\DataContext.cs",
+              "RelativeToolTip": "DataAccess\\Interactive\\DataContext.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAEwDIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T17:40:31.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SocialService.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\Business\\Concrete\\SocialService.cs",
+              "RelativeDocumentMoniker": "Business\\Concrete\\SocialService.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\Business\\Concrete\\SocialService.cs",
+              "RelativeToolTip": "Business\\Concrete\\SocialService.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAEwFwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T17:39:43.305Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SocialAndModeration.cs",
+              "DocumentMoniker": "C:\\Projects\\Csharp\\Tres\\Entities\\SocialAndModeration.cs",
+              "RelativeDocumentMoniker": "Entities\\SocialAndModeration.cs",
+              "ToolTip": "C:\\Projects\\Csharp\\Tres\\Entities\\SocialAndModeration.cs",
+              "RelativeToolTip": "Entities\\SocialAndModeration.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAUwDMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T17:36:46.195Z"
             }
           ]
         }
